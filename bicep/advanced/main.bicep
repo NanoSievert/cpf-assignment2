@@ -17,7 +17,7 @@ module network 'Networking.bicep' = {
     location: location
   }
 }
-/*
+
 module security 'Security.bicep' = {
   name: 'securityDeployment'
   params: {
@@ -25,7 +25,7 @@ module security 'Security.bicep' = {
     subnet_id: network.outputs.subnet_id
   }
 }
-*/
+
 module container 'DeployApp.bicep' = {
   name: 'containerDeployment'
   params: {

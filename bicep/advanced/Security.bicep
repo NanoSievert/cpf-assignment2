@@ -5,8 +5,8 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
   name: 'b-r0993343-nsg'
   location: location
   properties: {
-    securityRules: [
-      {
+    securityRules: [ 
+      { //Rule: allow http on inbound
         name: 'AllowHTTP'
         properties: {
           priority: 100
@@ -18,7 +18,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
           sourceAddressPrefix: '*'
           destinationAddressPrefix: '*'
         }
-      }, {
+      }, { //Rule: deny all (higher prio => less important => allow only http)
         name: 'DenyAllInbound'
         properties: {
           priority: 200

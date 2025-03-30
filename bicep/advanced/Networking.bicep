@@ -41,10 +41,7 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   properties: {}
 }
 
-
 output vnet object = vnet
 output subnet_id string = vnet.properties.subnets[0].id
 output public_ip_id string = publicIP.id
 output log_analytics_id string = logAnalytics.id
-
-

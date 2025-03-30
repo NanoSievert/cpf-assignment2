@@ -10,7 +10,7 @@ resource Container_Registry 'Microsoft.ContainerRegistry/registries@2024-11-01-p
   name: registry_name
   location: location
   sku: {
-    name: 'Basic'
+    name: 'Basic' // Tier of service
   }
   properties: {
     adminUserEnabled: true

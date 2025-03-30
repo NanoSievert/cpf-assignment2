@@ -60,7 +60,7 @@ resource Container_App 'Microsoft.ContainerInstance/containerGroups@2024-10-01-p
     
     restartPolicy: 'OnFailure'
     ipAddress: {
-      type: 'Private'  // Use Private IP type
+      type: 'Public'
       ports: [
         {
           protocol: 'TCP'
