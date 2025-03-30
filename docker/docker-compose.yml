@@ -1,0 +1,6 @@
+services:
+  ass2:
+    image: r0993343containerregistry.azurecr.io/cloud-platforms/assignment2:latest
+    ports:
+      - "8080:80"
+

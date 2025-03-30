@@ -1,0 +1,78 @@
+// Define parameters
+
+// Secure
+
+@secure()
+param registry_username string // allow admin to insert username
+
+@secure()
+param registry_password string // allow admin to insert password
+
+// Inherited
+
+param location string
+param public_ip_id string
+param log_analytics_id string
+param registry_login_server string
+
+// Open
+
+param app_name string = 'b-r0993343-app'
+
+resource Container_App 'Microsoft.ContainerInstance/containerGroups@2024-10-01-preview' = {
+  name: app_name
+  location: location
+  zones: [
+    '2'
+  ]
+  properties: {
+    sku: 'Standard'
+    containers: [
+      {
+        name: app_name
+        properties: {
+          image: '${registry_login_server}/cloud-platforms/assignment2:latest'
+          ports: [
+            {
+              protocol: 'TCP'
+              port: 80
+            }
+          ]
+          environmentVariables: []
+          resources: {
+            requests: {
+              memoryInGB: json('1.5')
+              cpu: json('1')
+            }
+          }
+        }
+      }
+    ]
+    initContainers: []
+    imageRegistryCredentials: [
+      {
+        server: registry_login_server
+        username: registry_username
+        password: registry_password
+      }
+    ]
+    
+    restartPolicy: 'OnFailure'
+    ipAddress: {
+      type: 'Public'
+      ports: [
+        {
+          protocol: 'TCP'
+          port: 80
+        }
+      ]
+      publicIP: public_ip_id
+    }
+    osType: 'Linux'
+    diagnostics: {
+      logAnalytics: {
+        workspaceId: log_analytics_id
+      }
+    }
+  }
+}
